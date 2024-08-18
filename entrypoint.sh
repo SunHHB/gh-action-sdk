@@ -35,10 +35,10 @@ cat feeds.conf
 feeds_version=$(cat feeds.conf | head -1 | awk -Fopenwrt- '{print $2}')
 
 rm -rf feeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang -b 23.x feeds/packages/lang/golang
+git clone https://github.com/SunHHB/packages_lang_golang -b 23.x feeds/packages/lang/golang
 
 rm -rf feeds/packages/lang/node
-git clone https://github.com/sbwml/feeds_packages_lang_node-prebuilt -b packages-$feeds_version feeds/packages/lang/node
+git clone https://github.com/SunHHB/feeds_packages_lang_node-prebuilt -b packages-$feeds_version feeds/packages/lang/node
 
 make defconfig > /dev/null
 
