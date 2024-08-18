@@ -11,7 +11,11 @@ if [ -n "$KEY_BUILD" ]; then
 fi
 
 if [ -z "$NO_DEFAULT_FEEDS" ]; then
-	cat feeds.conf.default >> feeds.conf
+	sed \
+		-e 's,https://git.openwrt.org/feed/,https://github.com/openwrt/,' \
+		-e 's,https://git.openwrt.org/openwrt/,https://github.com/openwrt/,' \
+		-e 's,https://git.openwrt.org/project/,https://github.com/openwrt/,' \
+		feeds.conf.default > feeds.conf
 fi
 
 echo "src-link $FEEDNAME /feed/" >> feeds.conf
@@ -28,8 +32,13 @@ cat feeds.conf
 
 ./scripts/feeds update -a > /dev/null
 
+feeds_version=$(cat feeds.conf | head -1 | awk -Fopenwrt- '{print $2}')
+
 rm -rf feeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang > /dev/null
+git clone https://github.com/sbwml/packages_lang_golang -b 23.x feeds/packages/lang/golang
+
+rm -rf feeds/packages/lang/node
+git clone https://github.com/sbwml/feeds_packages_lang_node-prebuilt -b packages-$feeds_version feeds/packages/lang/node
 
 make defconfig > /dev/null
 
