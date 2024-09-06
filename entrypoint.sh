@@ -40,7 +40,6 @@ git clone https://github.com/SunHHB/packages_lang_golang -b 23.x feeds/packages/
 rm -rf feeds/packages/lang/node
 git clone https://github.com/SunHHB/feeds_packages_lang_node-prebuilt -b packages-$feeds_version feeds/packages/lang/node
 
-rm -rf feeds/packages/net/tailscale
 
 make defconfig > /dev/null
 
