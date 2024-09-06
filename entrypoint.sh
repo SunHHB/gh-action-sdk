@@ -40,6 +40,7 @@ git clone https://github.com/SunHHB/packages_lang_golang -b 23.x feeds/packages/
 rm -rf feeds/packages/lang/node
 git clone https://github.com/SunHHB/feeds_packages_lang_node-prebuilt -b packages-$feeds_version feeds/packages/lang/node
 
+sed -i '/\/etc\/init\.d\/tailscale/d;/\/etc\/config\/tailscale/d;' feeds/packages/net/tailscale/Makefile
 
 make defconfig > /dev/null
 
