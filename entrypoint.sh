@@ -52,6 +52,13 @@ group "feeds update -a"
 ./scripts/feeds update -a
 endgroup
 
+group "tailscale patch"
+sed -i '/\/etc\/init\.d\/tailscale/d;/\/etc\/config\/tailscale/d;' ./feeds/packages/net/tailscale/Makefile
+sed -i "s/1.58.2/1.80.2/g" ./feeds/packages/net/tailscale/Makefile
+sed -i "s/452f355408e4e2179872387a863387e06346fc8a6f9887821f9b8a072c6a5b0a/b4d5eb15e2d11ad71803dea8ec8ddcaf5a400eabe12a5f469d133cfeae56678b/g" ./feeds/packages/net/tailscale/Makefile
+endgroup
+
+
 group "golang 1.24.x"
 # golang 1.24.x
 rm -rf feeds/packages/lang/golang
